@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giulia Marchesani — Laurea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#17233a;
+    --ink-soft:#26375a;
+    --parchment:#f4ecda;
+    --parchment-deep:#ecdfc0;
+    --gold:#b8912f;
+    --burgundy:#7a2632;
+    --charcoal:#2a2723;
+    --line:rgba(122,38,50,0.55);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--parchment);
+    color:var(--charcoal);
+    font-family:'EB Garamond', serif;
+    overflow-x:hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  h1,h2,h3{ font-family:'Playfair Display', serif; }
+
+  .stamp-label{
+    font-family:'Special Elite', monospace;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+  }
+
+  /* ---------- LANDING / FASCICOLO ---------- */
+  #landing{
+    position:fixed;
+    inset:0;
+    z-index:50;
+    background:
+      radial-gradient(circle at 50% 30%, var(--ink-soft) 0%, var(--ink) 65%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 0.9s ease, visibility 0.9s ease;
+  }
+  #landing.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+
+  .folder{
+    text-align:center;
+    color:var(--parchment);
+    padding:2rem;
+  }
+
+  .folder .eyebrow{
+    color:var(--gold);
+    margin-bottom:1.4rem;
+    opacity:0.9;
+  }
+
+  .seal-btn{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    border:2px solid var(--gold);
+    background:radial-gradient(circle at 35% 30%, #8f6a1f, var(--burgundy) 75%);
+    color:var(--parchment);
+    font-family:'Special Elite', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    cursor:pointer;
+    box-shadow:0 0 0 6px rgba(184,145,47,0.12), 0 20px 40px rgba(0,0,0,0.45);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    line-height:1.3;
+    transition:transform 0.35s ease, box-shadow 0.35s ease;
+    animation:pulse 3.2s ease-in-out infinite;
+  }
+  .seal-btn:hover{ transform:scale(1.05); }
+  .seal-btn:focus-visible{ outline:3px solid var(--parchment); outline-offset:6px; }
+
+  @keyframes pulse{
+    0%,100%{ box-shadow:0 0 0 6px rgba(184,145,47,0.12), 0 20px 40px rgba(0,0,0,0.45); }
+    50%{ box-shadow:0 0 0 12px rgba(184,145,47,0.05), 0 20px 40px rgba(0,0,0,0.45); }
+  }
+
+  .folder .hint{
+    margin-top:1.6rem;
+    font-family:'EB Garamond', serif;
+    font-style:italic;
+    color:rgba(244,236,218,0.65);
+    font-size:0.95rem;
+  }
+
+  /* ---------- MAIN CONTENT ---------- */
+  #site{
+    min-height:100vh;
+  }
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 1.6rem;
+  }
+
+  /* HERO */
+  .hero{
+    background:
+      linear-gradient(180deg, var(--ink) 0%, var(--ink-soft) 60%, var(--parchment) 100%);
+    color:var(--parchment);
+    padding:5rem 0 7rem;
+    text-align:center;
+    position:relative;
+  }
+
+  .uni-crest{
+    width:64px;
+    height:auto;
+    margin-bottom:1.1rem;
+    filter:drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+  }
+
+  .case-number{
+    color:var(--gold);
+    margin-bottom:1.2rem;
+    opacity:0.85;
+  }
+
+  .hero h1{
+    font-size:clamp(2.6rem, 8vw, 4.4rem);
+    font-weight:900;
+    line-height:1.05;
+    letter-spacing:0.01em;
+  }
+
+  .hero .course{
+    margin-top:1.1rem;
+    font-size:clamp(1rem, 3vw, 1.25rem);
+    font-style:italic;
+    color:rgba(244,236,218,0.88);
+    max-width:520px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .stamp-resolved{
+    display:inline-block;
+    margin-top:2.3rem;
+    padding:0.55rem 1.4rem;
+    border:2px solid var(--gold);
+    color:var(--gold);
+    transform:rotate(-4deg);
+    font-family:'Special Elite', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.15em;
+  }
+
+  /* SECTION shared */
+  section.card-section{
+    padding:3.6rem 0;
+    position:relative;
+  }
+
+  .section-label{
+    color:var(--burgundy);
+    margin-bottom:0.6rem;
+  }
+
+  .section-title{
+    font-size:clamp(1.6rem, 4vw, 2.1rem);
+    font-weight:700;
+    margin-bottom:1.8rem;
+  }
+
+  /* EVIDENCE BOARD LINK between info cards */
+  .board{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:2.2rem;
+    padding-left:1.6rem;
+  }
+
+  .board::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:14px;
+    bottom:14px;
+    width:0;
+    border-left:2px dashed var(--line);
+  }
+
+  .pin-card{
+    position:relative;
+    background:#fffdf6;
+    border:1px solid rgba(23,35,58,0.12);
+    box-shadow:2px 4px 0 rgba(23,35,58,0.06);
+    padding:1.5rem 1.6rem;
+  }
+
+  .pin-card::before{
+    content:"";
+    position:absolute;
+    left:-1.9rem;
+    top:18px;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:var(--burgundy);
+    box-shadow:0 0 0 3px rgba(122,38,50,0.18);
+  }
+
+  .pin-card .k{
+    font-family:'Special Elite', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:block;
+    margin-bottom:0.4rem;
+  }
+
+  .pin-card .v{
+    font-family:'Playfair Display', serif;
+    font-size:1.35rem;
+    font-weight:700;
+    color:var(--ink);
+  }
+
+  .pin-card .sub{
+    margin-top:0.35rem;
+    font-size:0.98rem;
+    color:var(--charcoal);
+    opacity:0.85;
+  }
+
+  .map-frame{
+    margin-top:1.5rem;
+    border:1px solid rgba(23,35,58,0.15);
+    filter:sepia(12%) saturate(85%);
+  }
+  .map-frame iframe{
+    width:100%;
+    height:280px;
+    border:0;
+    display:block;
+  }
+
+  .map-link{
+    display:inline-block;
+    margin-top:0.9rem;
+    font-family:'Special Elite', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--burgundy);
+    text-decoration:none;
+    border-bottom:1px solid var(--burgundy);
+    padding-bottom:2px;
+  }
+  .map-link:hover{ opacity:0.75; }
+
+  /* RSVP */
+  .rsvp-section{
+    background:var(--ink);
+    color:var(--parchment);
+    padding:4rem 0 5rem;
+  }
+  .rsvp-section .section-label{ color:var(--gold); }
+  .rsvp-section .section-title{ color:var(--parchment); }
+  .rsvp-section p.lead{
+    color:rgba(244,236,218,0.8);
+    margin-bottom:2rem;
+    max-width:520px;
+  }
+
+  .form-frame{
+    background:var(--parchment);
+    border:1px solid rgba(184,145,47,0.4);
+    padding:0.6rem;
+  }
+  .form-frame iframe{
+    width:100%;
+    min-height:900px;
+    border:0;
+    display:block;
+  }
+
+  .form-fallback{
+    font-family:'Special Elite', monospace;
+    font-size:0.85rem;
+    background:var(--parchment);
+    color:var(--charcoal);
+    padding:1.4rem;
+    border:1px dashed var(--burgundy);
+  }
+
+  footer{
+    text-align:center;
+    padding:3rem 1.6rem 4rem;
+    font-family:'Special Elite', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink);
+    opacity:0.55;
+  }
+
+  /* fade-in on scroll */
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  @media (max-width:520px){
+    .board{ padding-left:1.3rem; }
+    .pin-card::before{ left:-1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ LANDING / FASCICOLO CHIUSO ============ -->
+<div id="landing">
+  <div class="folder">
+    <div class="stamp-label eyebrow">Fascicolo riservato</div>
+    <button class="seal-btn" id="openSeal" aria-label="Apri l'invito">Apri il<br>Fascicolo</button>
+    <div class="hint">tocca il sigillo per procedere</div>
+  </div>
+</div>
+
+<!-- ============ CONTENUTO PRINCIPALE ============ -->
+<div id="site">
+
+  <header class="hero">
+    <div class="wrap">
+      <!--
+        STEMMA SAPIENZA:
+        1) carica il file nella cartella "images/" del repository (es. images/sapienza-logo.png)
+        2) lascia questo tag così com'è, il percorso è già corretto
+      -->
+      <img src="images/sapienza-logo.png" alt="Stemma Sapienza Università di Roma" class="uni-crest" onerror="this.style.display='none'">
+      <div class="stamp-label case-number">Fascicolo N. 25.07.2026</div>
+      <h1>Giulia<br>Marchesani</h1>
+      <p class="course">Laurea in Criminalità, Investigazione<br>e Sicurezza Internazionale</p>
+      <div class="stamp-resolved">Caso Risolto</div>
+    </div>
+  </header>
+
+  <section class="card-section reveal">
+    <div class="wrap">
+      <div class="stamp-label section-label">Verbale dell'evento</div>
+      <h2 class="section-title">Quando e dove</h2>
+
+      <div class="board">
+        <div class="pin-card">
+          <span class="k">Data</span>
+          <span class="v">25 Luglio 2026</span>
+          <div class="sub">Segnatevi il giorno in agenda — vi aspetto per festeggiare insieme.</div>
+        </div>
+
+        <div class="pin-card">
+          <span class="k">Luogo</span>
+          <span class="v">Lido Azzurro</span>
+          <div class="sub">Pescara</div>
+
+          <div class="map-frame">
+            <iframe
+              src="https://www.google.com/maps?q=Lido+Azzurro+Pescara&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Mappa Lido Azzurro, Pescara">
+            </iframe>
+          </div>
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Lido+Azzurro+Pescara" target="_blank" rel="noopener">apri in google maps →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="rsvp-section reveal">
+    <div class="wrap">
+      <div class="stamp-label section-label">Conferma la tua presenza</div>
+      <h2 class="section-title">RSVP</h2>
+      <p class="lead">Fammi sapere se sarai dei nostri: la tua conferma verrà archiviata direttamente nel fascicolo.</p>
+
+      <!--
+        ISTRUZIONI PER GIULIA:
+        Sostituisci il src qui sotto con il link "embed" del tuo Google Form.
+        Vedi spiegazione passo-passo nella risposta della chat.
+      -->
+      <div class="form-frame">
+        <iframe
+          src="https://docs.google.com/forms/d/e/INSERISCI_QUI_ID_FORM/viewform?embedded=true"
+          title="Modulo conferma presenza">
+          Caricamento del modulo…
+        </iframe>
+      </div>
+
+      <p class="form-fallback">
+        Se il modulo non si carica, forse Giulia deve ancora collegare il proprio Google Form: sostituire l'indirizzo dell'iframe con quello generato da Google Forms.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    Con affetto — Giulia · 25 Luglio 2026 · Pescara
+  </footer>
+
+</div>
+
+<script>
+  // Apertura del "fascicolo"
+  const landing = document.getElementById('landing');
+  const openBtn = document.getElementById('openSeal');
+
+  openBtn.addEventListener('click', () => {
+    landing.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+    setTimeout(() => {
+      document.getElementById('site').scrollIntoView({behavior:'smooth', block:'start'});
+    }, 300);
+  });
+
+  // blocca lo scroll finché il fascicolo è chiuso
+  document.body.style.overflow = 'hidden';
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
