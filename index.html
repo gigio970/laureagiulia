@@ -6,17 +6,20 @@
 <title>Giulia Marchesani — Laurea</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#17233a;
-    --ink-soft:#26375a;
+    --red-light:#ff5a4e;
+    --red-mid:#c81f3a;
+    --red-deep:#6e0f22;
+    --red-dark:#320611;
     --parchment:#f4ecda;
     --parchment-deep:#ecdfc0;
-    --gold:#b8912f;
-    --burgundy:#7a2632;
+    --gold:#e8c98a;
+    --gold-deep:#a97c3f;
+    --burgundy:#c81f3a;
     --charcoal:#2a2723;
-    --line:rgba(122,38,50,0.55);
+    --line:rgba(200,31,58,0.5);
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -26,7 +29,7 @@
   body{
     background:var(--parchment);
     color:var(--charcoal);
-    font-family:'EB Garamond', serif;
+    font-family:'Space Grotesk', sans-serif;
     overflow-x:hidden;
   }
 
@@ -34,74 +37,117 @@
     *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
   }
 
-  h1,h2,h3{ font-family:'Playfair Display', serif; }
+  h1,h2,h3{ font-family:'Unbounded', sans-serif; }
 
   .stamp-label{
-    font-family:'Special Elite', monospace;
-    letter-spacing:0.12em;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    letter-spacing:0.1em;
     text-transform:uppercase;
     font-size:0.72rem;
   }
 
-  /* ---------- LANDING / FASCICOLO ---------- */
+  /* ---------- LANDING / PERGAMENA ---------- */
   #landing{
     position:fixed;
     inset:0;
     z-index:50;
-    background:
-      radial-gradient(circle at 50% 30%, var(--ink-soft) 0%, var(--ink) 65%);
+    background:linear-gradient(180deg, var(--red-light) 0%, var(--red-mid) 45%, var(--red-deep) 75%, var(--red-dark) 100%);
     display:flex;
     align-items:center;
     justify-content:center;
-    transition:opacity 0.9s ease, visibility 0.9s ease;
+    transition:opacity 0.7s ease, visibility 0.7s ease;
   }
   #landing.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
 
-  .folder{
+  .scroll-stage{
     text-align:center;
     color:var(--parchment);
     padding:2rem;
   }
 
-  .folder .eyebrow{
+  .scroll-stage .eyebrow{
     color:var(--gold);
-    margin-bottom:1.4rem;
-    opacity:0.9;
+    margin-bottom:1.8rem;
+    opacity:0.95;
+    font-weight:700;
   }
 
-  .seal-btn{
-    width:150px;
-    height:150px;
-    border-radius:50%;
-    border:2px solid var(--gold);
-    background:radial-gradient(circle at 35% 30%, #8f6a1f, var(--burgundy) 75%);
-    color:var(--parchment);
-    font-family:'Special Elite', monospace;
-    font-size:0.78rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
+  .scroll{
+    position:relative;
+    background:none;
+    border:0;
+    padding:0;
     cursor:pointer;
-    box-shadow:0 0 0 6px rgba(184,145,47,0.12), 0 20px 40px rgba(0,0,0,0.45);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:230px;
+    margin:0 auto;
+  }
+  .scroll:focus-visible{ outline:3px solid var(--gold); outline-offset:10px; }
+
+  .scroll-cap{
+    width:230px;
+    height:30px;
+    border-radius:50%;
+    flex-shrink:0;
+    background:linear-gradient(180deg, #f3dca6, var(--gold-deep) 70%);
+    box-shadow:0 4px 10px rgba(0,0,0,0.45), inset 0 -3px 6px rgba(0,0,0,0.25);
+    position:relative;
+    z-index:2;
+    transition:transform 0.9s cubic-bezier(.65,0,.35,1);
+  }
+  .scroll-cap.top{ margin-bottom:-10px; }
+  .scroll-cap.bottom{ margin-top:-10px; }
+  .scroll.open .scroll-cap.top{ transform:translateY(-6px); }
+  .scroll.open .scroll-cap.bottom{ transform:translateY(6px); }
+
+  .scroll-paper{
+    width:196px;
+    background:var(--parchment);
+    color:var(--charcoal);
+    overflow:hidden;
+    height:14px;
     display:flex;
     align-items:center;
     justify-content:center;
-    line-height:1.3;
-    transition:transform 0.35s ease, box-shadow 0.35s ease;
-    animation:pulse 3.2s ease-in-out infinite;
+    text-align:center;
+    position:relative;
+    z-index:1;
+    box-shadow:inset 0 0 18px rgba(105,60,20,0.18);
+    transition:height 0.9s cubic-bezier(.65,0,.35,1);
+    padding:0 0.8rem;
   }
-  .seal-btn:hover{ transform:scale(1.05); }
-  .seal-btn:focus-visible{ outline:3px solid var(--parchment); outline-offset:6px; }
+  .scroll.open .scroll-paper{ height:190px; }
 
-  @keyframes pulse{
-    0%,100%{ box-shadow:0 0 0 6px rgba(184,145,47,0.12), 0 20px 40px rgba(0,0,0,0.45); }
-    50%{ box-shadow:0 0 0 12px rgba(184,145,47,0.05), 0 20px 40px rgba(0,0,0,0.45); }
+  .scroll-text{
+    opacity:0;
+    transform:translateY(6px);
+    transition:opacity 0.5s ease 0.45s, transform 0.5s ease 0.45s;
+    font-family:'Unbounded', sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    line-height:1.5;
+    color:var(--red-deep);
+  }
+  .scroll.open .scroll-text{ opacity:1; transform:translateY(0); }
+
+  .scroll-text small{
+    display:block;
+    margin-top:0.5rem;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:500;
+    font-size:0.78rem;
+    color:var(--gold-deep);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
   }
 
-  .folder .hint{
-    margin-top:1.6rem;
-    font-family:'EB Garamond', serif;
-    font-style:italic;
-    color:rgba(244,236,218,0.65);
+  .scroll-stage .hint{
+    margin-top:1.8rem;
+    font-family:'Space Grotesk', sans-serif;
+    color:rgba(244,236,218,0.75);
     font-size:0.95rem;
   }
 
@@ -119,7 +165,7 @@
   /* HERO */
   .hero{
     background:
-      linear-gradient(180deg, var(--ink) 0%, var(--ink-soft) 60%, var(--parchment) 100%);
+      linear-gradient(180deg, var(--red-light) 0%, var(--red-mid) 40%, var(--red-deep) 75%, var(--parchment) 100%);
     color:var(--parchment);
     padding:5rem 0 7rem;
     text-align:center;
@@ -136,21 +182,23 @@
   .case-number{
     color:var(--gold);
     margin-bottom:1.2rem;
-    opacity:0.85;
+    opacity:0.9;
   }
 
   .hero h1{
-    font-size:clamp(2.6rem, 8vw, 4.4rem);
-    font-weight:900;
-    line-height:1.05;
-    letter-spacing:0.01em;
+    font-size:clamp(2.8rem, 9vw, 5rem);
+    font-weight:800;
+    line-height:1.03;
+    letter-spacing:-0.01em;
+    text-shadow:0 6px 24px rgba(50,6,17,0.4);
   }
 
   .hero .course{
-    margin-top:1.1rem;
-    font-size:clamp(1rem, 3vw, 1.25rem);
-    font-style:italic;
-    color:rgba(244,236,218,0.88);
+    margin-top:1.2rem;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:500;
+    font-size:clamp(1rem, 3vw, 1.2rem);
+    color:rgba(244,236,218,0.92);
     max-width:520px;
     margin-left:auto;
     margin-right:auto;
@@ -159,13 +207,16 @@
   .stamp-resolved{
     display:inline-block;
     margin-top:2.3rem;
-    padding:0.55rem 1.4rem;
+    padding:0.6rem 1.5rem;
     border:2px solid var(--gold);
+    border-radius:100px;
     color:var(--gold);
-    transform:rotate(-4deg);
-    font-family:'Special Elite', monospace;
-    font-size:0.78rem;
-    letter-spacing:0.15em;
+    transform:rotate(-3deg);
+    font-family:'Unbounded', sans-serif;
+    font-weight:700;
+    font-size:0.75rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
   }
 
   /* SECTION shared */
@@ -180,9 +231,10 @@
   }
 
   .section-title{
-    font-size:clamp(1.6rem, 4vw, 2.1rem);
+    font-size:clamp(1.7rem, 4vw, 2.3rem);
     font-weight:700;
     margin-bottom:1.8rem;
+    color:var(--red-deep);
   }
 
   /* EVIDENCE BOARD LINK between info cards */
@@ -221,24 +273,25 @@
     height:10px;
     border-radius:50%;
     background:var(--burgundy);
-    box-shadow:0 0 0 3px rgba(122,38,50,0.18);
+    box-shadow:0 0 0 3px rgba(200,31,58,0.18);
   }
 
   .pin-card .k{
-    font-family:'Special Elite', monospace;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
     font-size:0.68rem;
-    letter-spacing:0.12em;
+    letter-spacing:0.1em;
     text-transform:uppercase;
-    color:var(--gold);
+    color:var(--gold-deep);
     display:block;
     margin-bottom:0.4rem;
   }
 
   .pin-card .v{
-    font-family:'Playfair Display', serif;
-    font-size:1.35rem;
+    font-family:'Unbounded', sans-serif;
+    font-size:1.3rem;
     font-weight:700;
-    color:var(--ink);
+    color:var(--red-deep);
   }
 
   .pin-card .sub{
@@ -263,9 +316,10 @@
   .map-link{
     display:inline-block;
     margin-top:0.9rem;
-    font-family:'Special Elite', monospace;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
     font-size:0.75rem;
-    letter-spacing:0.08em;
+    letter-spacing:0.06em;
     text-transform:uppercase;
     color:var(--burgundy);
     text-decoration:none;
@@ -276,7 +330,7 @@
 
   /* RSVP */
   .rsvp-section{
-    background:var(--ink);
+    background:linear-gradient(180deg, var(--red-dark), var(--red-deep));
     color:var(--parchment);
     padding:4rem 0 5rem;
   }
@@ -301,7 +355,7 @@
   }
 
   .form-fallback{
-    font-family:'Special Elite', monospace;
+    font-family:'Space Grotesk', sans-serif;
     font-size:0.85rem;
     background:var(--parchment);
     color:var(--charcoal);
@@ -312,12 +366,13 @@
   footer{
     text-align:center;
     padding:3rem 1.6rem 4rem;
-    font-family:'Special Elite', monospace;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
     font-size:0.7rem;
-    letter-spacing:0.1em;
+    letter-spacing:0.08em;
     text-transform:uppercase;
-    color:var(--ink);
-    opacity:0.55;
+    color:var(--red-deep);
+    opacity:0.6;
   }
 
   /* fade-in on scroll */
@@ -341,10 +396,16 @@
 
 <!-- ============ LANDING / FASCICOLO CHIUSO ============ -->
 <div id="landing">
-  <div class="folder">
+  <div class="scroll-stage">
     <div class="stamp-label eyebrow">Fascicolo riservato</div>
-    <button class="seal-btn" id="openSeal" aria-label="Apri l'invito">Apri il<br>Fascicolo</button>
-    <div class="hint">tocca il sigillo per procedere</div>
+    <button class="scroll" id="openSeal" aria-label="Srotola la pergamena per aprire l'invito">
+      <span class="scroll-cap top"></span>
+      <span class="scroll-paper">
+        <span class="scroll-text">Il caso è chiuso<small>apri il fascicolo</small></span>
+      </span>
+      <span class="scroll-cap bottom"></span>
+    </button>
+    <div class="hint">tocca la pergamena per srotolarla</div>
   </div>
 </div>
 
@@ -429,16 +490,26 @@
 </div>
 
 <script>
-  // Apertura del "fascicolo"
+  // Apertura della pergamena
   const landing = document.getElementById('landing');
   const openBtn = document.getElementById('openSeal');
+  let opened = false;
 
   openBtn.addEventListener('click', () => {
-    landing.classList.add('hidden');
-    document.body.style.overflow = 'auto';
+    if(opened) return;
+    opened = true;
+
+    // 1) la pergamena si srotola
+    openBtn.classList.add('open');
+
+    // 2) dopo l'animazione, dissolvenza verso il sito
     setTimeout(() => {
-      document.getElementById('site').scrollIntoView({behavior:'smooth', block:'start'});
-    }, 300);
+      landing.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+      setTimeout(() => {
+        document.getElementById('site').scrollIntoView({behavior:'smooth', block:'start'});
+      }, 300);
+    }, 1300);
   });
 
   // blocca lo scroll finché il fascicolo è chiuso
